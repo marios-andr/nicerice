@@ -4,14 +4,17 @@ This is a very nice dot file configuration of hyprland, quickshell, and some oth
 The title does not deceive, it is indeed very nice. In fact, it's so nice that I use it daily,
 which may not seem like much, but hey, what else can you ask for?
 
-Requirements:
+### Requirements:
 
 - hyprland
 - qs
 - awww
 - hypridle
-- playerctl
-(optional):
+- hyprlock
+- playerctl  
+  
+### Optional Requirements:  
+  
 - stow (for auto-setup with symlinks)
 - khal (for calendar)
 - vdirsyncer: (for calendar syncing with google)
