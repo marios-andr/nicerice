@@ -1,0 +1,8 @@
+singleton KhalConfig 1.0 KhalConfig.qml
+CalendarApp 1.0 CalendarApp.qml
+Calendar 1.0 Calendar.qml
+EventsDisplay 1.0 EventsDisplay.qml
+EventCard 1.0 EventCard.qml
+EventAddWindow 1.0 EventAddWindow.qml
+KhalConfigWindow 1.0 KhalConfigWindow.qml
+VdirsyncerSetupWindow 1.0 VdirsyncerSetupWindow.qml

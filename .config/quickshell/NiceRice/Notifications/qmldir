@@ -1,0 +1,4 @@
+singleton NotificationCenter 1.0 NotificationCenter.qml
+NotificationsPanel 1.0 NotificationsPanel.qml
+NotificationCard 1.0 NotificationCard.qml
+NotificationsApp 1.0 NotificationsApp.qml

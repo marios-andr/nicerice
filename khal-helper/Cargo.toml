@@ -1,0 +1,18 @@
+[package]
+name = "khal-helper"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.104"
+chrono = "0.4.45"
+clap = { version = "4.6.6", features = ["derive"] }
+glob = "0.3.4"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
+
