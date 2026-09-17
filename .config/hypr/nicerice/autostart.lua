@@ -7,16 +7,16 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("systemctl --user stop xdg-desktop-portal xdg-desktop-portal-hyprland")
     hl.exec_cmd("systemctl --user start xdg-desktop-portal-hyprland xdg-desktop-portal")
 
-    -- awww daemon (TODO: need to add a delay between the two commands)
+    -- awww daemon
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("awww img /usr/share/sddm/themes/sddm-astronaut-theme/Backgrounds/pixel_sakura.gif")
+
+    -- Listener scripts
     hl.exec_cmd("~/.config/nicerice/scripts/nicerice-wallpaper-pause.sh")
+    hl.exec_cmd("~/.config/nicerice/scripts/nicerice-battery-warn.sh")
 
     -- Load cursor
     hl.exec_cmd("hyprctl setcursor Bibata-Modern-Ice 24")
-
-    -- Start listeners TODO
-    hl.exec_cmd("~/.config/ml4w/listeners.sh --startall")
 
     -- Start polkit daemon
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")

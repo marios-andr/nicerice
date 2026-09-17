@@ -1,6 +1,6 @@
+.vscode/
 khal-helper/target/
 khal-helper/Cargo.lock
 .config/quickshell/.env
 .config/quickshell/.qmlls.ini
 .config/nicerice/bin/
-.config/hypr/.vscode/

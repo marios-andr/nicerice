@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 import "../Theme"
 import "../CalendarApp"
 
@@ -10,7 +11,7 @@ Item {
 
     property bool calendarActive: false
     onCalendarActiveChanged: {
-        KhalConfig.should_load_events = calendarActive
+        KhalConfig.should_load_events = calendarActive;
     }
 
     // Qt date/time format for the time, supplied from statusbar.json.
@@ -18,8 +19,8 @@ Item {
     // Qt date/time format for the date shown below the time when expanded.
     property string dateFormat: "ddd, dd MMM"
 
-    implicitWidth: Math.max(timeText.implicitWidth, dateText.implicitWidth) + 6
-    implicitHeight: timeText.implicitHeight + dateText.implicitHeight + 8
+    implicitWidth: timeText.implicitWidth + dateText.implicitWidth + 14
+    implicitHeight: Theme.moduleHeight//Math.max(timeText.implicitHeight + dateText.implicitHeight) - 4
 
     SystemClock {
         id: clock
@@ -38,28 +39,30 @@ Item {
         }
     }
 
-    Text {
-        id: timeText
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-        // Shift up so the date below has more room.
-        anchors.verticalCenterOffset: -6
-        text: Qt.formatDateTime(clock.date, clockRoot.timeFormat)
-        color: Theme.font
-        font.family: Theme.fontFamily
-        font.pixelSize: 16
-        font.bold: true
-    }
+    RowLayout {
+        anchors.fill: parent
+        anchors.bottomMargin: 4
+        anchors.leftMargin: 4
+        anchors.rightMargin: 4
 
-    Text {
-        id: dateText
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: timeText.bottom
-        anchors.topMargin: 1
-        text: Qt.formatDateTime(clock.date, clockRoot.dateFormat)
-        color: Theme.font
-        font.family: Theme.fontFamily
-        font.pixelSize: 11
+        Text {
+            id: timeText
+            Layout.alignment: Qt.AlignBottom
+            text: Qt.formatDateTime(clock.date, clockRoot.timeFormat)
+            color: Theme.font
+            font.family: Theme.fontFamily
+            font.pixelSize: Theme.fontSize - 1
+            font.bold: true
+        }
+
+        Text {
+            id: dateText
+            Layout.alignment: Qt.AlignBottom
+            text: Qt.formatDateTime(clock.date, clockRoot.dateFormat)
+            color: Theme.font
+            font.family: Theme.fontFamily
+            font.pixelSize: Theme.fontSize - 5
+        }
     }
 
     MouseArea {
@@ -83,7 +86,7 @@ Item {
             anchor.rect.x: clockRoot.width / 2 - width / 2
             anchor.rect.y: clockRoot.height + 15
             onClosed: {
-                clockRoot.calendarActive = false
+                clockRoot.calendarActive = false;
             }
         }
     }

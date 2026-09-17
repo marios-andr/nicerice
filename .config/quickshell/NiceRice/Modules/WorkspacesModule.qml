@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
@@ -5,8 +7,8 @@ import "../Theme"
 
 Item {
     id: wsRoot
-    implicitWidth: rowLayout.implicitWidth + 16
-    implicitHeight: rowLayout.implicitHeight + 8
+    implicitWidth: rowLayout.implicitWidth + 8
+    implicitHeight: Theme.moduleHeight//rowLayout.implicitHeight + 4
 
     // Minimum number of workspaces to always display, even when empty. The list
     // still grows beyond this to reveal any higher-numbered workspace that
@@ -64,6 +66,7 @@ Item {
         anchors.fill: parent
         color: Theme.primary
         radius: 14
+
     }
 
     // Background of occupied workspaces

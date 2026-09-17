@@ -10,7 +10,7 @@ PanelWindow {
     id: root
     readonly property var defaultSettings: ({
             "bar": {
-                "height": 45
+                "height": 40
             }
         })
 
@@ -78,8 +78,8 @@ PanelWindow {
             implicitWidth: leftArea.implicitWidth + 10
             color: Theme.background
 
-            bottomLeftRadius: 18
-            bottomRightRadius: 18
+            bottomLeftRadius: 20
+            bottomRightRadius: 20
         }
 
         RowLayout {
@@ -91,7 +91,7 @@ PanelWindow {
 
             spacing: 10
 
-            //TODO: Media player on left-most
+            //TODO: Media player 
 
             NiceModule {}
 
@@ -106,8 +106,8 @@ PanelWindow {
 
             topLeftRadius: 0
             topRightRadius: 0
-            bottomLeftRadius: 18
-            bottomRightRadius: 18
+            bottomLeftRadius: 20
+            bottomRightRadius: 20
         }
 
         RowLayout {
@@ -119,7 +119,7 @@ PanelWindow {
             spacing: 10
 
             Rectangle {
-                Layout.preferredWidth: 15
+                Layout.preferredWidth: 5
                 // Layout.fillWidth: true
                 Layout.fillHeight: true
                 color: "transparent"
@@ -128,7 +128,7 @@ PanelWindow {
             ClockModule {}
 
             Rectangle {
-                Layout.preferredWidth: 15
+                Layout.preferredWidth: 5
                 // Layout.fillWidth: true
                 Layout.fillHeight: true
                 color: "transparent"
@@ -143,8 +143,8 @@ PanelWindow {
             implicitWidth: rightArea.implicitWidth + 10
             color: Theme.background
 
-            bottomLeftRadius: 18
-            bottomRightRadius: 18
+            bottomLeftRadius: 20
+            bottomRightRadius: 20
         }
 
         RowLayout {

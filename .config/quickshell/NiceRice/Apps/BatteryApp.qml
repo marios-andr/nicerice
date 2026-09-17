@@ -4,6 +4,7 @@ import QtQuick.Effects
 import Quickshell.Services.UPower
 import "../Theme"
 
+// TODO: Make toggle for keeping battery level at 80%
 ColumnLayout {
     id: layout
     anchors.centerIn: parent

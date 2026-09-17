@@ -281,7 +281,7 @@ ColumnLayout {
                         required property Network modelData
                         network: modelData
 
-                        passwordVisible: plz.focusedNetwork === network
+                        expanded: plz.focusedNetwork === network
                         onCardClicked: {
                             plz.focusedNetwork = network.known || !needsCredentials || plz.focusedNetwork === network ? null : network;
                         }

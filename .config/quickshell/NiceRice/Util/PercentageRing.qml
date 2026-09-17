@@ -12,7 +12,7 @@ Item {
 
     property int diameter: Theme.dotSize
     property int ringThickness: 2
-    property color ringBg: Theme.secondary
+    property color ringBg: Theme.tertiary
     property color ringFg: Theme.selected
     property color iconColor: Theme.font
 

@@ -1,3 +1,4 @@
 singleton Networks 1.0 Networks.qml
 NetworkingApp 1.0 NetworkingApp.qml
 NetworkCard 1.0 NetworkCard.qml
+NetworkSetup 1.0 NetworkSetup.qml

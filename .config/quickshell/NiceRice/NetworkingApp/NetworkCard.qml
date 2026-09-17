@@ -12,10 +12,13 @@ Rectangle {
     property Network network
     readonly property bool isWifi: network instanceof WifiNetwork
     readonly property bool needsPassword: isWifi && (network.security === WifiSecurityType.WpaPsk || network.security === WifiSecurityType.Wpa2Psk || network.security === WifiSecurityType.Sae)
-    readonly property bool needsUser: isWifi && (network.security === WifiSecurityType.WpaEap || network.security === WifiSecurityType.Wpa2Eap)
-    readonly property bool needsCredentials: needsPassword || needsUser
+    readonly property bool needsIdentity: isWifi && (network.security === WifiSecurityType.WpaEap || network.security === WifiSecurityType.Wpa2Eap)
+    readonly property bool needsCredentials: needsPassword || needsIdentity
 
-    property bool passwordVisible: false
+    readonly property bool isLoading: network.stateChanging || isSubmitting
+    property bool isSubmitting: false
+
+    property bool expanded: false
     property bool showWrongPassword: false
 
     signal cardClicked
@@ -25,12 +28,10 @@ Rectangle {
     signal networkStateChanged
 
     function submitForm() {
-        if (card.needsUser && userField.text.length > 0 && passwordField.text.length > 0) {
-            let s = network.nmSettings;
-            
+        if (card.needsIdentity && userField.text.length > 0 && passwordField.text.length > 0) {
+            netSetup.setupEnterpriseWifi(network.name, userField.text, passwordField.text);
         } else if (card.needsPassword && passwordField.text.length > 0) {
             network.connectWithPsk(passwordField.text);
-            
         }
     }
 
@@ -45,7 +46,14 @@ Rectangle {
 
     implicitHeight: layout.implicitHeight
     radius: 12
-    color: netMouse.containsMouse ? Theme.secondary : Theme.primary
+    color: netMouse.containsMouse || expanded ? Theme.secondary : Theme.primary
+
+    onExpandedChanged: {
+        if (!expanded) {
+            passwordField.text = "";
+            showWrongPassword = false;
+        }
+    }
 
     Connections {
         target: card.network
@@ -58,10 +66,10 @@ Rectangle {
         }
     }
 
-    onPasswordVisibleChanged: {
-        if (!passwordVisible) {
-            passwordField.text = "";
-            showWrongPassword = false;
+    NetworkSetup {
+        id: netSetup
+        onSetupFinished: (success, output) => {
+            card.isSubmitting = false
         }
     }
 
@@ -77,14 +85,14 @@ Rectangle {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            // card.cardClicked = true;
             card.cardClicked();
-            if (card.network.stateChanging)
+            if (card.isLoading)
                 return;
             if (card.network.connected)
                 card.network.disconnect();
-            else if (card.network.known || !card.needsCredentials)
+            else if (card.network.known || !card.needsCredentials) {
                 card.network.connect();
+            }
         }
     }
 
@@ -134,7 +142,7 @@ Rectangle {
 
             Spinner {
                 sizeUnit: 0.7
-                visible: card.network.stateChanging
+                visible: card.isLoading
             }
 
             Item {
@@ -198,10 +206,11 @@ Rectangle {
         // --------------
         ColumnLayout {
             Layout.fillWidth: true
-            visible: card.needsCredentials && card.passwordVisible
+            visible: card.needsCredentials && card.expanded
             spacing: 2
 
             RowLayout {
+                visible: card.needsIdentity
                 Layout.fillWidth: true
                 spacing: 0
 
@@ -224,7 +233,7 @@ Rectangle {
                         echoMode: TextInput.Normal
                         color: Theme.font
                         font.family: Theme.fontFamily
-                        placeholderText: "User"
+                        placeholderText: "Identity"
                         placeholderTextColor: Theme.font_inactive
                         selectByMouse: true
                         background: Item {}
@@ -240,7 +249,7 @@ Rectangle {
 
             RowLayout {
                 Layout.fillWidth: true
-                
+
                 spacing: 0
 
                 Rectangle {

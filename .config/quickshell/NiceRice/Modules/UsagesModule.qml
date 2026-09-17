@@ -6,8 +6,8 @@ import "../Util"
 
 Item {
     id: usgRoot
-    implicitWidth: rowLayout.implicitWidth + 16
-    implicitHeight: rowLayout.implicitHeight + 8
+    implicitWidth: rowLayout.implicitWidth + 6
+    implicitHeight: Theme.moduleHeight//rowLayout.implicitHeight + 8
 
     // ----------------------------
     // -- Compute CPU/RAM usages --
@@ -89,8 +89,14 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: Theme.primary
-        radius: 14
+        color: usgMouse.containsMouse ? Theme.primary_hover : Theme.primary
+        radius: 12
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 100
+            }
+        }
     }
 
     RowLayout {
@@ -102,12 +108,18 @@ Item {
             implicitWidth: usgRoot.percentageTextWidth
             implicitHeight: Theme.dotSize
             radius: 10
-            color: Theme.secondary
+            color: usgMouse.containsMouse ? Theme.secondary_hover : Theme.secondary
 
             Behavior on implicitWidth {
                 NumberAnimation {
                     duration: 150
                     easing.type: Easing.OutQuad
+                }
+            }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 100
                 }
             }
 
@@ -129,12 +141,18 @@ Item {
             implicitWidth: usgRoot.percentageTextWidth
             implicitHeight: Theme.dotSize
             radius: 10
-            color: Theme.secondary
+            color: usgMouse.containsMouse ? Theme.secondary_hover : Theme.secondary
 
             Behavior on implicitWidth {
                 NumberAnimation {
                     duration: 150
                     easing.type: Easing.OutQuad
+                }
+            }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 100
                 }
             }
 
