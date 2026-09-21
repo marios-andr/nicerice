@@ -6,6 +6,7 @@ import "NiceRice"
 import "NiceRice/Notifications"
 import "NiceRice/CalendarApp"
 import "NiceRice/SidePanelApp"
+import "NiceRice/AppLauncher"
 
 ShellRoot {
 
@@ -28,6 +29,8 @@ ShellRoot {
     EventAddWindow {}
 
     NotificationsPanel {}
+
+    Launcher {}
 
     StatusbarWindow {}
 }

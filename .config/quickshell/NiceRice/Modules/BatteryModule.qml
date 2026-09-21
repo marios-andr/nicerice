@@ -10,7 +10,7 @@ import "../Util"
 Item { // TODO: 67 battery
     id: root
     implicitWidth: rowLayout.implicitWidth + 10
-    implicitHeight: rowLayout.implicitHeight + 8
+    implicitHeight: Theme.moduleHeight//rowLayout.implicitHeight + 8
 
     // The aggregate battery UPower exposes for the whole machine.
     readonly property var device: UPower.displayDevice
@@ -95,8 +95,8 @@ Item { // TODO: 67 battery
         Rectangle {
             visible: root.hasBattery
             Layout.alignment: Qt.AlignVCenter
-            implicitWidth: Theme.dotSize + 20
-            implicitHeight: Theme.dotSize
+            implicitWidth: Theme.dotSize + 16
+            implicitHeight: Theme.dotSize - 2
             radius: 10
             color: app.buttonHovered ? Theme.secondary_hover : Theme.secondary
 
@@ -106,15 +106,10 @@ Item { // TODO: 67 battery
                 }
             }
 
-            Behavior on implicitWidth {
-                NumberAnimation {
-                    duration: 150
-                }
-            }
-
             Text {
                 anchors.centerIn: parent
                 text: root.percent + "%"
+                font.pixelSize: Theme.fontSize - 1
                 font.family: Theme.fontFamily
                 color: Theme.font_secondary
             }

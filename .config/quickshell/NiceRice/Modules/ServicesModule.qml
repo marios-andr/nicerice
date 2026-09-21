@@ -7,7 +7,7 @@ Rectangle {
     default property alias content: layout.data
 
     implicitWidth: layout.implicitWidth + 10
-    implicitHeight: Theme.dotSize + 8
+    implicitHeight: Theme.moduleHeight
     radius: 14
     color: hovered.hovered ? Theme.secondary_hover : Theme.primary
 

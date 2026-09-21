@@ -85,7 +85,7 @@ Item {
     // ----------------------
 
     property bool showPercentageText: false
-    property int percentageTextWidth: usgRoot.showPercentageText ? Theme.dotSize + 20 : 0
+    property int percentageTextWidth: usgRoot.showPercentageText ? Theme.dotSize + 16 : 0
 
     Rectangle {
         anchors.fill: parent
@@ -106,7 +106,7 @@ Item {
 
         Rectangle {
             implicitWidth: usgRoot.percentageTextWidth
-            implicitHeight: Theme.dotSize
+            implicitHeight: Theme.dotSize - 2
             radius: 10
             color: usgMouse.containsMouse ? Theme.secondary_hover : Theme.secondary
 
@@ -127,6 +127,7 @@ Item {
                 visible: usgRoot.showPercentageText
                 anchors.centerIn: parent
                 text: Math.round(usgRoot.cpuUsage * 100) + "%"
+                font.pixelSize: Theme.fontSize - 1
                 font.family: Theme.fontFamily
                 color: Theme.font_secondary
             }
@@ -139,7 +140,7 @@ Item {
 
         Rectangle {
             implicitWidth: usgRoot.percentageTextWidth
-            implicitHeight: Theme.dotSize
+            implicitHeight: Theme.dotSize - 2
             radius: 10
             color: usgMouse.containsMouse ? Theme.secondary_hover : Theme.secondary
 
@@ -160,6 +161,7 @@ Item {
                 visible: usgRoot.showPercentageText
                 anchors.centerIn: parent
                 text: Math.round(usgRoot.memUsedFraction * 100) + "%"
+                font.pixelSize: Theme.fontSize - 1
                 font.family: Theme.fontFamily
                 color: Theme.font_secondary
             }

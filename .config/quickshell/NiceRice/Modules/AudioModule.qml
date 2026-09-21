@@ -11,7 +11,7 @@ Loader {
     sourceComponent: Item {
         id: root
         implicitWidth: rowLayout.implicitWidth + 10
-        implicitHeight: rowLayout.implicitHeight + 8
+        implicitHeight: Theme.moduleHeight//rowLayout.implicitHeight + 8
 
         readonly property real volume: Pipewire.defaultAudioSink?.audio?.volume ?? 0
         function iconSource(): string {
@@ -57,8 +57,8 @@ Loader {
 
             Rectangle {
                 Layout.alignment: Qt.AlignVCenter
-                implicitWidth: Theme.dotSize + 20
-                implicitHeight: Theme.dotSize
+                implicitWidth: Theme.dotSize + 16
+                implicitHeight: Theme.dotSize - 2
                 radius: 10
                 color: app.buttonHovered ? Theme.secondary_hover : Theme.secondary
 
@@ -68,15 +68,10 @@ Loader {
                     }
                 }
 
-                Behavior on implicitWidth {
-                    NumberAnimation {
-                        duration: 150
-                    }
-                }
-
                 Text {
                     anchors.centerIn: parent
                     text: (root.volume * 100).toFixed(0) + "%"
+                    font.pixelSize: Theme.fontSize - 1
                     font.family: Theme.fontFamily
                     color: Theme.font_secondary
                 }

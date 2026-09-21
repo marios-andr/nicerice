@@ -6,7 +6,7 @@ import "../Theme"
 
 Item {
     implicitWidth: layout.implicitWidth + 10
-    implicitHeight: layout.implicitHeight + 8
+    implicitHeight: Theme.moduleHeight//layout.implicitHeight + 8
 
     RowLayout {
         id: layout
@@ -25,6 +25,12 @@ Item {
                 radius: 14
                 color: mouse.containsMouse ? Theme.secondary : "transparent"
 
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 100
+                    }
+                }
+
                 Image {
                     anchors.centerIn: parent
                     source: tray.modelData.icon
@@ -42,17 +48,20 @@ Item {
                     cursorShape: Qt.PointingHandCursor
                     acceptedButtons: Qt.AllButtons
                     onClicked: event => {
-                        if (event.button === Qt.RightButton) {
+                        if (event.button === Qt.LeftButton) {
                             menu.open()
-                        } else if (event.button === Qt.LeftButton) {
+                        } else if (event.button === Qt.RightButton) {
                             tray.modelData.activate()
                         } else if (event.button === Qt.MiddleButton) {
                             tray.modelData.secondaryActivate()
                         }
                     }
+                    onDoubleClicked: event => {
+                        //TODO open owned application
+                    }
                 }
 
-                // TODO: Custom openener, open on containsMouse
+                // TODO: Custom openener
                 QsMenuAnchor {
                     id: menu
                     menu: tray.modelData.menu
